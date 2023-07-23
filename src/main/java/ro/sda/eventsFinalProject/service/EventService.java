@@ -18,6 +18,9 @@ public class EventService {
     }
 
     public Event saveEvent(Event eventToBeSaved) {
+        if (eventToBeSaved == null) {
+            throw new IllegalArgumentException("An event must have body");
+        }
         if (eventToBeSaved.getName() == null) {
             // Avoids the generation of NullPointerException for null event names!
             throw new IllegalArgumentException("An event must have a name");
@@ -46,14 +49,25 @@ public class EventService {
         return event;
     }
 
-    public List<Event> readAllEvents(){
+    public List<Event> readAllEvents() {
         return eventRepository.findAll();
     }
 
-    public Event eventUpdate(Event updatedEvent){
-           Event eventToUpdate = readEvent(updatedEvent.getId());
-           eventRepository.save(updatedEvent);
-           return eventToUpdate;
+    public Event eventUpdate(Event updatedEvent) {
+        if (updatedEvent == null) {
+            throw new IllegalArgumentException("An event cant be null");
+        }
+        Event eventToUpdate = readEvent(updatedEvent.getId());
+        eventRepository.save(updatedEvent);
+        return eventToUpdate;
+    }
+
+    public void deleteOneEvent(Integer id) {
+        Event eventToBeDeleted = readEvent(id);
+        eventRepository.delete(eventToBeDeleted);
+    }
+    public void deleteAllEvent() {
+        eventRepository.deleteAll();
     }
 
 }

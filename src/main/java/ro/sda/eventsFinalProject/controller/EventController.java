@@ -19,6 +19,9 @@ public class EventController {
 
     @PostMapping("/events")
     public ResponseEntity createEvent(@RequestBody Event event) {
+        if (event.getId() != null) {
+            return new ResponseEntity<>("The id must be empty", HttpStatus.BAD_REQUEST);
+        }
         try {
             Event savedEvent = eventService.saveEvent(event);
             return new ResponseEntity<>(savedEvent, HttpStatus.OK);
@@ -51,9 +54,32 @@ public class EventController {
         try {
             Event updated = eventService.eventUpdate(updatedEvent);
             return new ResponseEntity<>(updated, HttpStatus.OK);
-        } catch (IllegalArgumentException iAE){
-            return new ResponseEntity<>(iAE.getMessage(),HttpStatus.BAD_REQUEST);
+        } catch (IllegalArgumentException iAE) {
+            return new ResponseEntity<>(iAE.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+
+    @DeleteMapping("/events/{id}")
+    public ResponseEntity delete(@PathVariable Integer id) {
+        try {
+            eventService.deleteOneEvent(id);
+            return new ResponseEntity<>("Event deleted was successfully", HttpStatus.OK);
+        } catch (IllegalArgumentException iAE) {
+            return new ResponseEntity<>(iAE.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
+    @DeleteMapping("/events")
+    public ResponseEntity deleteAll() {
+        try {
+            eventService.deleteAllEvent();
+            return new ResponseEntity<>("All events was deleted", HttpStatus.OK);
+        } catch (IllegalArgumentException iAE) {
+            return new ResponseEntity<>(iAE.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
 
 }
