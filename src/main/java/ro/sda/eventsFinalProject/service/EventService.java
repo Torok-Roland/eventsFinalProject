@@ -44,7 +44,7 @@ public class EventService {
         //     return theOtherValue
         Event event = eventRepository.findById(id).orElse(null);
         if (event == null) {
-            throw new IllegalArgumentException("There it is no event with " + id);
+            throw new IllegalArgumentException("There it is no event with id:" + id);
         }
         return event;
     }
