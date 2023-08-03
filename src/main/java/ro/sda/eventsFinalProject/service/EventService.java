@@ -3,8 +3,6 @@ package ro.sda.eventsFinalProject.service;
 import org.springframework.stereotype.Service;
 import ro.sda.eventsFinalProject.model.Event;
 import ro.sda.eventsFinalProject.repository.EventRepository;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
