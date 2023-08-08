@@ -25,5 +25,5 @@ public class Event {
     private LocalDateTime endDate;
     private String description;
     private String location;
-
+    private String imgUrl;
 }
