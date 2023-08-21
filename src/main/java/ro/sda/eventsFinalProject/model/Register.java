@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Register {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -20,6 +20,12 @@ public class User {
     private String userName;
     @Column(nullable = false)
     private String password;
-    private String fullName;
 
+//    @Override
+//    public String toString() {
+//        return "Register{" +
+//                "id=" + id +
+//                ", userName='" + userName + '\'' +
+//                '}';
+//    }
 }
